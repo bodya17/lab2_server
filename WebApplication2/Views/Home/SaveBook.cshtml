@@ -1,8 +1,7 @@
 ﻿
 
-@using (Ajax.BeginForm("SaveBookToDb", "Home", new AjaxOptions { UpdateTargetId = "formWrapper", InsertionMode = InsertionMode.Replace }))
+@using (Ajax.BeginForm("SaveBookToDb", "Home", new AjaxOptions { }))
 {
-    <div id="formWrapper">sda</div>
     @Html.TextBox("title")
     <button>Save</button>
 }

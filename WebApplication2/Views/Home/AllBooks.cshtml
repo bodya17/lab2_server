@@ -10,6 +10,7 @@
     <div>
         <h4>@item.BookId</h4>
         <h4>@item.Title</h4>
+        @Html.ActionLink("Delete", "DeleteBook", "Home", new { bookId = @item.BookId }, null)
         <hr />
     </div>
 }

@@ -5,36 +5,28 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 using System.Text;
+using System.Data.Entity;
 
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
-        
-        
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult DeleteBook(int? bookId)
         {
-            ViewBag.Message = "Your application description page.";
-            using (Context _db = new Context())
+            using (Context db = new Context())
             {
-                Book b = new Book();
-                b.Title = "Some book";
-                _db.Books.Add(b);
-                _db.SaveChanges();
+                Book bookToDelete = db.Books.Where(x => x.BookId == bookId).Select(x => x).FirstOrDefault();
+                db.Entry(bookToDelete).State = EntityState.Deleted;
+                db.SaveChanges();
+
+                //db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Books]");
             }
-            
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.bookId = bookId;
             return View();
         }
 
