@@ -23,11 +23,16 @@ namespace WebApplication2.Controllers
                 Book bookToDelete = db.Books.Where(x => x.BookId == bookId).Select(x => x).FirstOrDefault();
                 db.Entry(bookToDelete).State = EntityState.Deleted;
                 db.SaveChanges();
-
                 //db.Database.ExecuteSqlCommand("TRUNCATE TABLE [Books]");
             }
             ViewBag.bookId = bookId;
             return View();
+        }
+
+        public ActionResult EditBook(int? bookId)
+        {
+
+            return Content("Editing " + bookId);
         }
 
         public ActionResult AllBooks()
@@ -45,7 +50,6 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult SaveBookToDb(string title)
         {
-            ///string title = Request["title"].ToString();
             using (Context _db = new Context())
             {
                 Book b = new Book();

@@ -5,12 +5,23 @@
 
 <h2>AllBooks</h2>
 
-@foreach (var item in Model)
-{
-    <div>
-        <h4>@item.BookId</h4>
-        <h4>@item.Title</h4>
-        @Html.ActionLink("Delete", "DeleteBook", "Home", new { bookId = @item.BookId }, null)
-        <hr />
-    </div>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookId</td>
+            <td>@item.Title</td>
+            <td>@Html.ActionLink("Delete", "DeleteBook", "Home", new { bookId = @item.BookId }, null)</td>
+            <td>@Html.ActionLink("Edit", "EditBook", "Home", new { bookId = @item.BookId }, null)</td>
+        </tr>
+    }
+</table>
+
